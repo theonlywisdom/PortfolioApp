@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36121.58 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.UI", "PortfolioApp.UI\PortfolioApp.UI.csproj", "{0451FF81-9867-47B7-B9AD-A8CD4C4F57CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.DataAccess", "PortfolioApp.DataAccess\PortfolioApp.DataAccess.csproj", "{A68FCC9A-5271-4949-964B-ED5B3FBD2220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0451FF81-9867-47B7-B9AD-A8CD4C4F57CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0451FF81-9867-47B7-B9AD-A8CD4C4F57CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0451FF81-9867-47B7-B9AD-A8CD4C4F57CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
