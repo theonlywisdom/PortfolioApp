@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.UI", "Portfoli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.DataAccess", "PortfolioApp.DataAccess\PortfolioApp.DataAccess.csproj", "{A68FCC9A-5271-4949-964B-ED5B3FBD2220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.Model", "PortfolioApp.Model\PortfolioApp.Model.csproj", "{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.Domain", "PortfolioApp.Model\PortfolioApp.Domain.csproj", "{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.UITests", "PortfolioApp.UITests\PortfolioApp.UITests.csproj", "{E901DF83-3F34-402E-B0C4-676B9B548FC5}"
 EndProject
