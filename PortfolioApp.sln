@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.UI", "Portfoli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.DataAccess", "PortfolioApp.DataAccess\PortfolioApp.DataAccess.csproj", "{A68FCC9A-5271-4949-964B-ED5B3FBD2220}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.Model", "PortfolioApp.Model\PortfolioApp.Model.csproj", "{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A68FCC9A-5271-4949-964B-ED5B3FBD2220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{754F91C7-8F01-4CC5-9A34-7D08AD5640D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
