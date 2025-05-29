@@ -1,4 +1,4 @@
-﻿namespace PortfolioApp.UI;
+﻿namespace PortfolioApp.UI.View;
 
 public partial class MainWindow : Window
 {
