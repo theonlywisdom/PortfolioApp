@@ -1,4 +1,6 @@
-﻿namespace PortfolioApp.DataAccess;
+﻿using SQLitePCL;
+
+namespace PortfolioApp.DataAccess;
 
 public class PortfolioAppContext : DbContext
 {
@@ -9,8 +11,21 @@ public class PortfolioAppContext : DbContext
     public DbSet<RunMetadata> Runs { get; set; }
     public DbSet<AggregatedResult> Results { get; set; }
 
+    public PortfolioAppContext()
+    {
+        Batteries.Init();
+    }
+
+    public PortfolioAppContext(DbContextOptions<PortfolioAppContext> options)
+        : base(options)
+    {
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=PortfolioApp.db");
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlite("Data Source=PortfolioApp.db");
+        }
     }
 }

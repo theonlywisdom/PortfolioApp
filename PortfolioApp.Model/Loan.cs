@@ -2,7 +2,7 @@
 
 public class Loan
 {
-    public int Id { get; set; }
+    public int LoanId { get; set; }
     public int PortfolioId { get; set; }
     public string CreditRating { get; set; }
     public decimal OutstandingAmount { get; set; }

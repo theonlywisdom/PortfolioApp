@@ -2,7 +2,7 @@
 
 public class CountryAdjustment
 {
-    public int Id { get; set; }
+    public int CountryAdjustmentId { get; set; }
     public string Country { get; set; }
-    public decimal PercentageChange { get; set; } 
+    public decimal PercentageChange { get; set; }
 }

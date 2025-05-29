@@ -2,7 +2,7 @@
 
 public class RunMetadata
 {
-    public int Id { get; set; }
+    public int RunMetadataId { get; set; }
     public DateTime Timestamp { get; set; }
     public TimeSpan ExecutionTime { get; set; }
     public List<CountryAdjustment> Adjustments { get; set; }

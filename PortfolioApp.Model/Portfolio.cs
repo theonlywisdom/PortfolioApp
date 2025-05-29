@@ -2,7 +2,7 @@
 
 public class Portfolio
 {
-    public int Id { get; set; }
+    public int PortfolioId { get; set; }
     public string Name { get; set; }
     public string Country { get; set; }
     public string Currency { get; set; }

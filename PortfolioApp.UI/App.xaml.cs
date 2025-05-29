@@ -1,4 +1,7 @@
-﻿namespace PortfolioApp.UI;
+﻿using Microsoft.EntityFrameworkCore;
+using PortfolioApp.DataAccess;
+
+namespace PortfolioApp.UI;
 
 public partial class App : Application
 {
@@ -15,6 +18,8 @@ public partial class App : Application
     {
         // Register your services here
         services.AddSingleton<MainWindow>();
+        services.AddDbContext<PortfolioAppContext>(options =>
+            options.UseSqlite("Data Source=PortfolioApp.db"));
     }
 
     protected override void OnStartup(StartupEventArgs e)

@@ -2,7 +2,7 @@
 
 public class AggregatedResult
 {
-    public int Id { get; set; }
+    public int AggregatedResultId { get; set; }
     public string PortfolioName { get; set; }
     public decimal TotalOutstanding { get; set; }
     public decimal TotalCollateral { get; set; }
