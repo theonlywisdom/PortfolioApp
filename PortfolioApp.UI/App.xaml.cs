@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PortfolioApp.DataAccess;
-
-namespace PortfolioApp.UI;
+﻿namespace PortfolioApp.UI;
 
 public partial class App : Application
 {
@@ -10,16 +7,10 @@ public partial class App : Application
     public App()
     {
         ServiceCollection services = new();
-        ConfigureServices(services);
-        _serviceProvider = services.BuildServiceProvider();
-    }
+        services.RegisterViewModels()
+            .RegisterViews();
 
-    private void ConfigureServices(ServiceCollection services)
-    {
-        // Register your services here
-        services.AddSingleton<MainWindow>();
-        services.AddDbContext<PortfolioAppContext>(options =>
-            options.UseSqlite("Data Source=PortfolioApp.db"));
+        _serviceProvider = services.BuildServiceProvider();
     }
 
     protected override void OnStartup(StartupEventArgs e)
