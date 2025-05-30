@@ -1,5 +1,5 @@
 ﻿namespace PortfolioApp.UI.ViewModel;
 
-public class MainViewModel
+public partial class MainViewModel : ViewModelBase
 {
 }
