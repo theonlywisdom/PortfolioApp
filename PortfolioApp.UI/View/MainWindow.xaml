@@ -3,11 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PortfolioApp.UI"
+        xmlns:local="clr-namespace:PortfolioApp.UI.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
 
-    </Grid>
+    <TabControl>
+        <TabItem Header="Run Simulation">
+            <local:RunSimulationView />
+        </TabItem>
+        <TabItem Header="Simulation History">
+            <local:SimulationHistoryView />
+        </TabItem>
+    </TabControl>
 </Window>
