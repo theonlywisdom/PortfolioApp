@@ -10,6 +10,8 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<PortfolioAppContext>(options =>
             options.UseSqlite("Data Source=PortfolioApp.db"));
         services.AddTransient<MainViewModel>();
+        services.AddTransient<IRunSimulationViewModel, RunSimulationViewModel>();
+        services.AddTransient<ISimulationHistoryViewModel, SimulationHistoryViewModel>();
         return services;
     }
 

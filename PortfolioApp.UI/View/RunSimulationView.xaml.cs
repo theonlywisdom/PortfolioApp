@@ -1,4 +1,6 @@
-﻿namespace PortfolioApp.UI.View;
+﻿
+
+namespace PortfolioApp.UI.View;
 
 public partial class RunSimulationView : UserControl
 {
