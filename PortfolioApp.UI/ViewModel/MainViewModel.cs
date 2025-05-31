@@ -1,8 +1,4 @@
-﻿using PortfolioApp.DataAccess.Services;
-using System.IO;
-using System.Reflection;
-
-namespace PortfolioApp.UI.ViewModel;
+﻿namespace PortfolioApp.UI.ViewModel;
 
 public partial class MainViewModel : ViewModelBase
 {

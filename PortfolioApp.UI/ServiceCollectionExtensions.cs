@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PortfolioApp.DataAccess;
-using PortfolioApp.DataAccess.Services;
-
-namespace PortfolioApp.UI;
+﻿namespace PortfolioApp.UI;
 
 public static class ServiceCollectionExtensions
 {
@@ -16,6 +12,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
         services.AddTransient<MainViewModel>();
+        services.AddTransient<ISimulationService, SimulationService>();
         services.AddTransient<IRunSimulationViewModel, RunSimulationViewModel>();
         services.AddTransient<ISimulationHistoryViewModel, SimulationHistoryViewModel>();
         return services;

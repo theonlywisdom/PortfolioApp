@@ -4,4 +4,11 @@ global using PortfolioApp.UI.View;
 global using PortfolioApp.UI.ViewModel;
 global using System.Windows;
 global using System.Windows.Controls;
-
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using PortfolioApp.DataAccess.Services;
+global using PortfolioApp.Domain;
+global using System.Collections.ObjectModel;
+global using System.IO;
+global using System.Reflection;
+global using Microsoft.EntityFrameworkCore;
+global using PortfolioApp.DataAccess;
