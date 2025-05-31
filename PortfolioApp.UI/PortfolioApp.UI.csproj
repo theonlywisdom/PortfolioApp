@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PortfolioApp.DataAccess\PortfolioApp.DataAccess.csproj" />
     <ProjectReference Include="..\PortfolioApp.Model\PortfolioApp.Domain.csproj" />
+    <ProjectReference Include="..\PortfolioApp.SimulationCore\PortfolioApp.SimulationCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

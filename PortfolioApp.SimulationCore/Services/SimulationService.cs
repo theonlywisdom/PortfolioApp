@@ -1,4 +1,4 @@
-﻿namespace PortfolioApp.DataAccess.Services;
+﻿namespace PortfolioApp.SimulationCore.Services;
 
 public class SimulationService(ICSVImportService cSVImportService, PortfolioAppContext  context) : ISimulationService
 {
