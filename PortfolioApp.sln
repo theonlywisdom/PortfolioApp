@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.UITests", "Por
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.SimulationCore", "PortfolioApp.SimulationCore\PortfolioApp.SimulationCore.csproj", "{4A849B07-FEE6-4899-A91C-3F062C58A0A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp.SimulationCoreTests", "PortfolioApp.SimulationCoreTests\PortfolioApp.SimulationCoreTests.csproj", "{AFA17116-A2B9-46D5-BD92-EBCD0F6EEA66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4A849B07-FEE6-4899-A91C-3F062C58A0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A849B07-FEE6-4899-A91C-3F062C58A0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A849B07-FEE6-4899-A91C-3F062C58A0A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA17116-A2B9-46D5-BD92-EBCD0F6EEA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA17116-A2B9-46D5-BD92-EBCD0F6EEA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA17116-A2B9-46D5-BD92-EBCD0F6EEA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA17116-A2B9-46D5-BD92-EBCD0F6EEA66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
