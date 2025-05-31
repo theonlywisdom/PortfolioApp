@@ -6,9 +6,8 @@ public partial class MainViewModel : ViewModelBase
     private readonly IRunSimulationViewModel _runSimulationViewModel;
     private readonly ISimulationHistoryViewModel _simulationHistoryViewModel;
 
-    public MainViewModel(IRunSimulationViewModel runSimulationViewModel, ISimulationHistoryViewModel simulationHistoryViewModel, ICSVImportService cSVImportService)
+    public MainViewModel(IRunSimulationViewModel runSimulationViewModel, ISimulationHistoryViewModel simulationHistoryViewModel)
     {
-        _cSVImportService = cSVImportService;
         _runSimulationViewModel = runSimulationViewModel;
         _simulationHistoryViewModel = simulationHistoryViewModel;
     }
@@ -26,7 +25,6 @@ public partial class MainViewModel : ViewModelBase
             string projectRoot = Path.GetFullPath(Path.Combine(basePath, @"..\..\.."));
 
             string csvPath = Path.Combine(projectRoot, "CSVFiles" );
-            await _cSVImportService.ClearTablesAsync();
             await _cSVImportService.ImportAllAsync(csvPath);
         }
         catch (Exception ex)

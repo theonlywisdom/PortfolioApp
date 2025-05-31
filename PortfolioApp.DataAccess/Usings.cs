@@ -5,3 +5,4 @@ global using System.Globalization;
 global using CsvHelper.Configuration;
 global using Microsoft.Extensions.Logging;
 global using SQLitePCL;
+global using System.Data;

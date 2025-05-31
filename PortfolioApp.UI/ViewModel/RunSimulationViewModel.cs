@@ -1,8 +1,7 @@
 ﻿namespace PortfolioApp.UI.ViewModel; 
 
-public partial class RunSimulationViewModel : ViewModelBase, IRunSimulationViewModel
+public partial class RunSimulationViewModel(ISimulationService simulationService) : ViewModelBase, IRunSimulationViewModel
 {
-    private readonly ISimulationService _simulationService;
     public ObservableCollection<CountryInputItem> CountryInputs { get; } = new()
     {
         new CountryInputItem { Country = "GB" },
@@ -20,13 +19,8 @@ public partial class RunSimulationViewModel : ViewModelBase, IRunSimulationViewM
     private async Task RunSimulationAsync()
     {
         var inputDict = CountryInputs.ToDictionary(c => c.Country, c => c.PriceChange);
-        var result = await _simulationService.RunSimulationAsync(inputDict);
+        var result = await simulationService.RunSimulationAsync(inputDict);
         Results = new ObservableCollection<PortfolioResult>(result);
-    }
-
-    public RunSimulationViewModel(ISimulationService simulationService)
-    {
-        _simulationService = simulationService;
     }
 }
 

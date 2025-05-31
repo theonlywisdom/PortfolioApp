@@ -13,7 +13,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Country}" Width="40" />
-                        <TextBox Text="{Binding PriceChange, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="5"/>
+                        <TextBox Text="{Binding PriceChange, UpdateSourceTrigger=LostFocus}" Width="60" Margin="5"/>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

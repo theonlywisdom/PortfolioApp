@@ -1,60 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PortfolioApp.DataAccess.Services;
 
-namespace PortfolioApp.DataAccess.Services;
-
-public class SimulationService : ISimulationService
+public class SimulationService(ICSVImportService cSVImportService) : ISimulationService
 {
-    private readonly IDataLoader _dataLoader;
-
-    public SimulationService(IDataLoader dataLoader)
-    {
-        _dataLoader = dataLoader;
-    }
-
     public async Task<IEnumerable<PortfolioResult>> RunSimulationAsync(Dictionary<string, double> priceChanges)
     {
-        var portfolios = await _dataLoader.LoadPortfoliosAsync();
-        var ratings = await _dataLoader.LoadRatingsAsync();
+        await cSVImportService.LoadDataAsync();
+        var portfolios = cSVImportService.Portfolios;
+        var ratings = cSVImportService.Ratings;
+        var loans = cSVImportService.Loans;
 
-        var result = portfolios
-            .GroupBy(p => p.PortfolioId)
-            .Select(g =>
+        var ratingDictionary = ratings.ToDictionary(r => r.CreditRating, r => r.ProbabilityOfDefault);
+
+        var result = loans.GroupBy(l => l.PortfolioId)
+            .Select(group =>
             {
-                double totalOutstanding = 0;
-                double totalCollateral = 0;
-                double scenarioCollateral = 0;
-                double expectedLoss = 0;
+                var portfolio = portfolios.FirstOrDefault(p => p.PortfolioId == group.Key);
+                if (portfolio == null) return null;
 
-                foreach (var p in g)
+                decimal totalOutstandingAmount = 0;
+                decimal totalCollateral = 0;
+                decimal scenarioCollateral = 0;
+                decimal expectedLoss = 0;
+
+                foreach (var loan in group)
                 {
-                    double priceChange = priceChanges.TryGetValue(p.Country, out var change) ? change / 100.0 : 0.0;
-                    double pd = ratings.FirstOrDefault(r => r.Rating == p.Rating)?.PD ?? 0.0;
+                    double priceChange = priceChanges
+                    .TryGetValue(portfolio.Country, out var change)
+                    ? change / 100.0
+                    : 0.0;
 
-                    double scenarioValue = p.CollateralValue * (1 + priceChange);
-                    double rr = scenarioValue / p.OutstandingAmount;
-                    double lgd = 1 - rr;
-                    double el = pd * lgd * p.OutstandingAmount;
+                    decimal probabilityOfDefault = ratingDictionary.TryGetValue(loan.CreditRating, out var prob) ? (decimal)prob : 0.0m;
 
-                    totalOutstanding += p.OutstandingAmount;
-                    totalCollateral += p.CollateralValue;
-                    scenarioCollateral += scenarioValue;
-                    expectedLoss += el;
+                    decimal snarioCollateralValue = loan.CollateralValue * (decimal)(1 + priceChange);
+
+                    decimal recoveryRate = snarioCollateralValue / loan.OriginalLoanAmount;
+
+                    decimal lossGivenDefault = 1 - recoveryRate;
+
+                    decimal expectedLossForLoan = loan.OutstandingAmount * probabilityOfDefault * lossGivenDefault;
+
+                    totalOutstandingAmount += loan.OutstandingAmount;
+                    totalCollateral += loan.CollateralValue;
+                    scenarioCollateral += snarioCollateralValue;
+                    expectedLoss += expectedLossForLoan;
                 }
 
                 return new PortfolioResult
                 {
-                    PortfolioId = g.Key,
-                    TotalOutstandingAmount = totalOutstanding,
+                    PortfolioId = group.Key,
+                    PortfolioName = portfolio.Name,
+                    Country = portfolio.Country,
+                    Currency = portfolio.Currency,
+                    TotalOutstandingAmount = totalOutstandingAmount,
                     TotalCollateralValue = totalCollateral,
                     TotalScenarioCollateralValue = scenarioCollateral,
                     TotalExpectedLoss = expectedLoss
                 };
-            });
+
+            }).Where(pr => pr != null)
+            .ToList();
 
         return result;
     }

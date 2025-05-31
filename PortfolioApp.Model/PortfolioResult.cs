@@ -2,9 +2,12 @@
 
 public class PortfolioResult
 {
-    public string PortfolioId { get; set; }
-    public double TotalOutstandingAmount { get; set; }
-    public double TotalCollateralValue { get; set; }
-    public double TotalScenarioCollateralValue { get; set; }
-    public double TotalExpectedLoss { get; set; }
+    public int PortfolioId { get; set; }
+    public string PortfolioName { get; set; }
+    public string Country { get; set; }
+    public string Currency { get; set; }
+    public decimal TotalOutstandingAmount { get; set; }
+    public decimal TotalCollateralValue { get; set; }
+    public decimal TotalScenarioCollateralValue { get; set; }
+    public decimal TotalExpectedLoss { get; set; }
 }

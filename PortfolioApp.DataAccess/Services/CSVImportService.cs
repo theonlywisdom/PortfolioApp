@@ -1,12 +1,29 @@
-﻿namespace PortfolioApp.DataAccess.Services;
+﻿using System.Reflection;
+
+namespace PortfolioApp.DataAccess.Services;
 
 public class CSVImportService : ICSVImportService
 {
-    private readonly PortfolioAppContext _context;
+    public IReadOnlyList<Rating> Ratings { get; private set; } = [];
+    public IReadOnlyList<Portfolio> Portfolios { get; private set; } = [];
+    public IReadOnlyList<Loan> Loans { get; private set; } = [];
 
-    public CSVImportService(PortfolioAppContext context)
+    public async Task LoadDataAsync()
     {
-        _context = context;
+        try
+        {
+            string basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location!)!;
+
+            string projectRoot = Path.GetFullPath(Path.Combine(basePath, @"..\..\.."));
+
+            string csvPath = Path.Combine(projectRoot, "CSVFiles");
+            await ImportAllAsync(csvPath);
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions (e.g., show a message to the user)
+            Console.WriteLine($"Error importing CSV: {ex.Message}");
+        }
     }
 
     public async Task ImportAllAsync(string csvFolderPath)
@@ -16,25 +33,19 @@ public class CSVImportService : ICSVImportService
         await ImportLoansAsync(Path.Combine(csvFolderPath, "Loans.csv"));
     }
 
-    private async Task ImportRatingsAsync(string filePath)
+    private async Task<List<Rating>> ImportRatingsAsync(string filePath)
     {
-        using var reader = new StreamReader(filePath);
-        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-
-        csv.Context.RegisterClassMap<RatingMap>();
-
-        var records = csv.GetRecords<Rating>().ToList();
-
-        var entities = records.Select(r => new Rating{
-            CreditRating = r.CreditRating,
-            ProbabilityOfDefault = r.ProbabilityOfDefault
-        }).ToList();
-
-        _context.Ratings.AddRange(entities);
 
         try
         {
-            await _context.SaveChangesAsync();
+            using var reader = new StreamReader(filePath);
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+            csv.Context.RegisterClassMap<RatingMap>();
+
+            var records = csv.GetRecords<Rating>().ToList();
+
+            return await Task.FromResult(records);
         }
         catch (Exception ex)
         {
@@ -43,28 +54,18 @@ public class CSVImportService : ICSVImportService
         }
     }
 
-    private async Task ImportPortfoliosAsync(string filePath)
+    private async Task<List<Portfolio>> ImportPortfoliosAsync(string filePath)
     {
-        using var reader = new StreamReader(filePath);
-        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-
-        csv.Context.RegisterClassMap<PortfolioMap>();
-
-        var records = csv.GetRecords<Portfolio>().ToList();
-
-        var entities = records.Select(p => new Portfolio
-        {
-            PortfolioId = p.PortfolioId,
-            Name = p.Name,
-            Country = p.Country,
-            Currency = p.Currency,
-        }).ToList();
-
-        _context.Portfolios.AddRange(entities);
-
         try
         {
-            await _context.SaveChangesAsync();
+            using var reader = new StreamReader(filePath);
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+            csv.Context.RegisterClassMap<PortfolioMap>();
+
+            var records = csv.GetRecords<Portfolio>().ToList();
+
+            return await Task.FromResult(records);
         }
         catch (Exception ex)
         {
@@ -73,30 +74,18 @@ public class CSVImportService : ICSVImportService
 
     }
 
-    private async Task ImportLoansAsync(string filePath)
+    private async Task<List<Loan>> ImportLoansAsync(string filePath)
     {
-        using var reader = new StreamReader(filePath);
-        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-
-        csv.Context.RegisterClassMap<LoanMap>();
-
-        var records = csv.GetRecords<Loan>().ToList();
-
-        var entities = records.Select(l => new Loan
-        {
-            LoanId = l.LoanId,
-            PortfolioId = l.PortfolioId,
-            OriginalLoanAmount = l.OriginalLoanAmount,
-            OutstandingAmount = l.OutstandingAmount,
-            CollateralValue = l.CollateralValue,
-            CreditRating = l.CreditRating,
-        }).ToList();
-
-        _context.Loans.AddRange(entities);
 
         try
         {
-            await _context.SaveChangesAsync();
+            using var reader = new StreamReader(filePath);
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+            csv.Context.RegisterClassMap<LoanMap>();
+
+            var records = csv.GetRecords<Loan>().ToList();
+            return await Task.FromResult(records);
         }
         catch (Exception ex)
         {
@@ -104,27 +93,16 @@ public class CSVImportService : ICSVImportService
         }
     }
 
-    public async Task ClearTablesAsync()
-    {
-        _context.RemoveRange(_context.Ratings);
-        _context.RemoveRange(_context.Portfolios);
-        _context.RemoveRange(_context.Loans);
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw;
-        }
-    }
 }
 
 public interface ICSVImportService
 {
-    Task ClearTablesAsync();
+    IReadOnlyList<Loan> Loans { get; }
+    IReadOnlyList<Portfolio> Portfolios { get; }
+    IReadOnlyList<Rating> Ratings { get; }
+
     Task ImportAllAsync(string csvFolderPath);
+    Task LoadDataAsync();
 }
 
 public sealed class RatingMap : ClassMap<Rating>
