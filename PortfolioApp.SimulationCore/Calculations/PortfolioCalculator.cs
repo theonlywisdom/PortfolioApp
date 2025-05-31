@@ -2,9 +2,13 @@
 
 public class PortfolioCalculator : IPortfolioCalculator
 {
-    public PortfolioResult Calculate(Portfolio portfolio, IEnumerable<Loan> loans,
-        IDictionary<string, double> priceChanges, IDictionary<string, double> pdRatings)
+    public PortfolioResult Calculate(PortfolioCalculationParametersObject calcObj)
     {
+        var portfolio = calcObj.Portfolio;
+        var loans = calcObj.Loans;
+        var priceChanges = calcObj.PriceChanges;
+        var pdRatings = calcObj.ProbabilityOfDefaultRatings;
+
         decimal totalOutstanding = 0;
         decimal totalCollateral = 0;
         decimal scenarioCollateral = 0;
@@ -42,9 +46,13 @@ public class PortfolioCalculator : IPortfolioCalculator
 
 public interface IPortfolioCalculator
 {
-    PortfolioResult Calculate(
-        Portfolio portfolio,
-        IEnumerable<Loan> loans,
-        IDictionary<string, double> priceChanges,
-        IDictionary<string, double> pdRatings);
+    PortfolioResult Calculate(PortfolioCalculationParametersObject calcObj);
+}
+
+public class PortfolioCalculationParametersObject
+{
+    public required Portfolio Portfolio { get; init; }
+    public required IEnumerable<Loan> Loans { get; init; }
+    public required IDictionary<string, double> PriceChanges { get; init; }
+    public required IDictionary<string, double> ProbabilityOfDefaultRatings { get; init; }
 }

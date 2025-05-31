@@ -8,17 +8,29 @@ public class SimulationCalculator(IPortfolioCalculator portfolioCalculator) : IS
         IEnumerable<Portfolio> portfolios,
         IEnumerable<Loan> loans,
         IDictionary<string, double> priceChanges,
-        IDictionary<string, double> pdRatings) => [.. loans
-            .GroupBy(l => l.PortfolioId)
+        IDictionary<string, double> pdRatings)
+    {
+        return [.. loans
+            .GroupBy(loan => loan.PortfolioId)
             .Select(group =>
             {
                 var portfolio = portfolios.FirstOrDefault(p => p.PortfolioId == group.Key);
-                return portfolio == null
-                    ? null
-                    : _portfolioCalculator.Calculate(portfolio, group, priceChanges, pdRatings);
+                if (portfolio == null)
+                    return null;
+
+                var calculationParams = new PortfolioCalculationParametersObject
+                {
+                    Portfolio = portfolio,
+                    Loans = group,
+                    PriceChanges = priceChanges,
+                    ProbabilityOfDefaultRatings = pdRatings
+                };
+
+                return _portfolioCalculator.Calculate(calculationParams);
             })
             .Where(result => result != null)
-            .Cast<PortfolioResult>()];
+            .Cast<PortfolioResult>()]; 
+    }
 }
 
 
