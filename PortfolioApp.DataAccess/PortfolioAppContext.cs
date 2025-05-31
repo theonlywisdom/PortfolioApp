@@ -1,4 +1,5 @@
-﻿using SQLitePCL;
+﻿using Microsoft.Extensions.Logging;
+using SQLitePCL;
 
 namespace PortfolioApp.DataAccess;
 
@@ -25,7 +26,15 @@ public class PortfolioAppContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlite("Data Source=PortfolioApp.db");
+            optionsBuilder.UseSqlite("Data Source=PortfolioApp.db").LogTo(Console.WriteLine,
+                new[] { DbLoggerCategory.Database.Command.Name },
+                LogLevel.Information)
+        .EnableSensitiveDataLogging();
         }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Rating>().HasKey(r => r.RatingId);
     }
 }

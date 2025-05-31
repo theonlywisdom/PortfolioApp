@@ -11,8 +11,8 @@ using PortfolioApp.DataAccess;
 namespace PortfolioApp.DataAccess.Migrations
 {
     [DbContext(typeof(PortfolioAppContext))]
-    [Migration("20250529204203_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250531023910_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,8 +84,11 @@ namespace PortfolioApp.DataAccess.Migrations
                     b.Property<decimal>("CollateralValue")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Rating")
+                    b.Property<string>("CreditRating")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("OriginalLoanAmount")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("OutstandingAmount")
@@ -130,7 +133,7 @@ namespace PortfolioApp.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Rating")
+                    b.Property<string>("CreditRating")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -15,7 +15,7 @@ public class CSVImportService : ICSVImportService
     public async Task ImportAllAsync(string csvFolderPath)
     {
         await ImportRatingsAsync(Path.Combine(csvFolderPath, "Ratings.csv"));
-        //await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
+        await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
         //await ImportLoansAsync(Path.Combine(csvFolderPath, "Loans.csv"));
     }
 
@@ -42,6 +42,8 @@ public class CSVImportService : ICSVImportService
         using var reader = new StreamReader(filePath);
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
+        csv.Context.RegisterClassMap<PortfolioMap>();
+
         var records = csv.GetRecords<Portfolio>().ToList();
 
         var entities = records.Select(p => new Portfolio
@@ -53,7 +55,16 @@ public class CSVImportService : ICSVImportService
         }).ToList();
 
         _context.Portfolios.AddRange(entities);
-        await _context.SaveChangesAsync();
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
 
     }
 
@@ -90,5 +101,16 @@ public sealed class RatingMap : ClassMap<Rating>
     {
         Map(m => m.CreditRating).Name("Rating");
         Map(m => m.ProbabilityOfDefault).Name("ProbablilityOfDefault");
+    }
+}
+
+public sealed class PortfolioMap : ClassMap<Portfolio>
+{
+    public PortfolioMap()
+    {
+        Map(p => p.PortfolioId).Name("Port_ID");
+        Map(p => p.Name).Name("Port_Name");
+        Map(p => p.Country).Name("Port_Country");
+        Map(p => p.Currency).Name("Port_CCY");
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PortfolioApp.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class initialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,9 +61,10 @@ namespace PortfolioApp.DataAccess.Migrations
                     LoanId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PortfolioId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreditRating = table.Column<string>(type: "TEXT", nullable: false),
+                    OriginalLoanAmount = table.Column<decimal>(type: "TEXT", nullable: false),
                     OutstandingAmount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    CollateralValue = table.Column<decimal>(type: "TEXT", nullable: false)
+                    CollateralValue = table.Column<decimal>(type: "TEXT", nullable: false),
+                    CreditRating = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
