@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
             options.UseSqlite("Data Source=PortfolioApp.db"))
             .AddTransient<ICSVImportService, CSVImportService>()
             .AddTransient<ISimulationPersister, SimulationPersister>()
+            .AddTransient<IPortfolioCalculator, PortfolioCalculator>()
             .AddTransient<ISimulationCalculator, SimulationCalculator>()
             .AddTransient<ISimulationService, SimulationService>();
 
