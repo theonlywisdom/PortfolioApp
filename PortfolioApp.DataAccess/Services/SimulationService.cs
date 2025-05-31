@@ -1,6 +1,10 @@
-﻿namespace PortfolioApp.DataAccess.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Text.Json;
 
-public class SimulationService(ICSVImportService cSVImportService) : ISimulationService
+namespace PortfolioApp.DataAccess.Services;
+
+public class SimulationService(ICSVImportService cSVImportService, PortfolioAppContext  context) : ISimulationService
 {
     public async Task<IEnumerable<PortfolioResult>> RunSimulationAsync(Dictionary<string, double> priceChanges)
     {
@@ -10,6 +14,8 @@ public class SimulationService(ICSVImportService cSVImportService) : ISimulation
         var loans = cSVImportService.Loans;
 
         var ratingDictionary = ratings.ToDictionary(r => r.CreditRating, r => r.ProbabilityOfDefault);
+
+        var stopwatch = Stopwatch.StartNew();
 
         var result = loans.GroupBy(l => l.PortfolioId)
             .Select(group =>
@@ -59,6 +65,32 @@ public class SimulationService(ICSVImportService cSVImportService) : ISimulation
 
             }).Where(pr => pr != null)
             .ToList();
+
+        stopwatch.Stop(); 
+        
+        var runMetadata = new RunMetadata
+        {
+            RunTime = DateTime.UtcNow,
+            DurationMs = stopwatch.ElapsedMilliseconds,
+            Summary = $"Simulated {result.Count} portfolios.",
+            PriceChangesJson = JsonSerializer.Serialize(priceChanges)
+        };
+
+        context.Runs.Add(runMetadata);
+        await context.SaveChangesAsync();
+
+        var aggregatedResults = result.Select(r => new AggregatedResult
+        {
+            PortfolioName = r.PortfolioName,
+            TotalOutstanding = r.TotalOutstandingAmount,
+            TotalCollateral = r.TotalCollateralValue,
+            TotalScenarioCollateral = r.TotalScenarioCollateralValue,
+            TotalExpectedLoss = r.TotalExpectedLoss,
+            RunMetadataId = runMetadata.RunMetadataId
+        }).ToList();
+
+        context.SimulationResults.AddRange(aggregatedResults);
+        await context.SaveChangesAsync();
 
         return result;
     }
