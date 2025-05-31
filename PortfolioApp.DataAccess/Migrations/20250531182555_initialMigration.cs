@@ -19,6 +19,7 @@ namespace PortfolioApp.DataAccess.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     RunTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DurationMs = table.Column<long>(type: "INTEGER", nullable: false),
+                    PriceChangesJson = table.Column<string>(type: "TEXT", nullable: false),
                     Summary = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -33,10 +34,10 @@ namespace PortfolioApp.DataAccess.Migrations
                     AggregatedResultId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PortfolioName = table.Column<string>(type: "TEXT", nullable: false),
-                    TotalOutstanding = table.Column<decimal>(type: "TEXT", nullable: false),
-                    TotalCollateral = table.Column<decimal>(type: "TEXT", nullable: false),
-                    TotalScenarioCollateral = table.Column<decimal>(type: "TEXT", nullable: false),
-                    TotalExpectedLoss = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TotalOutstanding = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalCollateral = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalScenarioCollateral = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalExpectedLoss = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RunMetadataId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

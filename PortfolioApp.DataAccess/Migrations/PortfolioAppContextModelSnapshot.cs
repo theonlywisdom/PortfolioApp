@@ -31,16 +31,16 @@ namespace PortfolioApp.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("TotalCollateral")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalExpectedLoss")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalOutstanding")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalScenarioCollateral")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("AggregatedResultId");
 
@@ -57,6 +57,10 @@ namespace PortfolioApp.DataAccess.Migrations
 
                     b.Property<long>("DurationMs")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PriceChangesJson")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("RunTime")
                         .HasColumnType("TEXT");

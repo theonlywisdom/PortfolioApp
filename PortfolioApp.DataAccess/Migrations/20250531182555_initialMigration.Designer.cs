@@ -11,7 +11,7 @@ using PortfolioApp.DataAccess;
 namespace PortfolioApp.DataAccess.Migrations
 {
     [DbContext(typeof(PortfolioAppContext))]
-    [Migration("20250531180122_initialMigration")]
+    [Migration("20250531182555_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -34,16 +34,16 @@ namespace PortfolioApp.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("TotalCollateral")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalExpectedLoss")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalOutstanding")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalScenarioCollateral")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("AggregatedResultId");
 
@@ -60,6 +60,10 @@ namespace PortfolioApp.DataAccess.Migrations
 
                     b.Property<long>("DurationMs")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PriceChangesJson")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("RunTime")
                         .HasColumnType("TEXT");
