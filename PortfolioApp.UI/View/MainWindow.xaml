@@ -11,14 +11,7 @@
     Height="450"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <DockPanel>
-        <StackPanel Margin="10 0" DockPanel.Dock="Right">
-            <Button
-                Width="100"
-                Height="30"
-                Command="{Binding LoadDataCommand}"
-                Content="Load Data" />
-        </StackPanel>
+    <ScrollViewer>
         <TabControl>
             <TabItem Header="Run Simulation">
                 <view:RunSimulationView DataContext="{Binding RunSimulationViewModel}" />
@@ -27,5 +20,5 @@
                 <view:SimulationHistoryView DataContext="{Binding SimulationHistoryViewModel}" />
             </TabItem>
         </TabControl>
-    </DockPanel>
+    </ScrollViewer>
 </Window>

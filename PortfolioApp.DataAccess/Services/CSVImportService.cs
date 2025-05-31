@@ -28,9 +28,9 @@ public class CSVImportService : ICSVImportService
 
     public async Task ImportAllAsync(string csvFolderPath)
     {
-        await ImportRatingsAsync(Path.Combine(csvFolderPath, "Ratings.csv"));
-        await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
-        await ImportLoansAsync(Path.Combine(csvFolderPath, "Loans.csv"));
+        Ratings = await ImportRatingsAsync(Path.Combine(csvFolderPath, "Ratings.csv"));
+        Portfolios = await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
+        Loans= await ImportLoansAsync(Path.Combine(csvFolderPath, "Loans.csv"));
     }
 
     private async Task<List<Rating>> ImportRatingsAsync(string filePath)
