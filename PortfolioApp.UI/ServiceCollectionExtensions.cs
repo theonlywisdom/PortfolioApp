@@ -1,20 +1,27 @@
-﻿namespace PortfolioApp.UI;
+﻿using PortfolioApp.SimulationCore.Calculations;
+using PortfolioApp.SimulationCore.Helpers;
+
+namespace PortfolioApp.UI;
 
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddDbContext<PortfolioAppContext>(options =>
-            options.UseSqlite("Data Source=PortfolioApp.db"));
-        services.AddTransient<ICSVImportService, CSVImportService>();
+            options.UseSqlite("Data Source=PortfolioApp.db"))
+            .AddTransient<ICSVImportService, CSVImportService>()
+            .AddTransient<ISimulationPersister, SimulationPersister>()
+            .AddTransient<ISimulationCalculator, SimulationCalculator>()
+            .AddTransient<ISimulationService, SimulationService>();
+
         return services;
     }
+
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
-        services.AddTransient<MainViewModel>();
-        services.AddTransient<ISimulationService, SimulationService>();
-        services.AddTransient<IRunSimulationViewModel, RunSimulationViewModel>();
-        services.AddTransient<ISimulationHistoryViewModel, SimulationHistoryViewModel>();
+        services.AddTransient<MainViewModel>()
+            .AddTransient<IRunSimulationViewModel, RunSimulationViewModel>()
+            .AddTransient<ISimulationHistoryViewModel, SimulationHistoryViewModel>();
         return services;
     }
 
