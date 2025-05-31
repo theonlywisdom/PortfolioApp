@@ -2,9 +2,8 @@
 
 public class RunMetadata
 {
-    public int RunMetadataId { get; set; }
-    public DateTime Timestamp { get; set; }
-    public TimeSpan ExecutionTime { get; set; }
-    public List<CountryAdjustment> Adjustments { get; set; }
-    public List<AggregatedResult> Results { get; set; }
+    public DateTime RunTime { get; set; }
+    public long DurationMs { get; set; }
+    public string Summary { get; set; }
+    public ICollection<AggregatedResult> Results { get; set; }
 }
