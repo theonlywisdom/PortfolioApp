@@ -3,5 +3,5 @@
 public class Rating
 {
     public string CreditRating { get; set; }
-    public decimal ProbabilityOfDefault { get; set; }
+    public double ProbabilityOfDefault { get; set; }
 }
