@@ -98,7 +98,7 @@ namespace PortfolioApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Results",
+                name: "SimulationResults",
                 columns: table => new
                 {
                     AggregatedResultId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -133,7 +133,7 @@ namespace PortfolioApp.DataAccess.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Results_RunMetadataId",
-                table: "Results",
+                table: "SimulationResults",
                 column: "RunMetadataId");
         }
 
@@ -150,7 +150,7 @@ namespace PortfolioApp.DataAccess.Migrations
                 name: "Ratings");
 
             migrationBuilder.DropTable(
-                name: "Results");
+                name: "SimulationResults");
 
             migrationBuilder.DropTable(
                 name: "Portfolios");

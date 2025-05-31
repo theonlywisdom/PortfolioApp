@@ -49,7 +49,7 @@ namespace PortfolioApp.DataAccess.Migrations
 
                     b.HasIndex("RunMetadataId");
 
-                    b.ToTable("Results");
+                    b.ToTable("SimulationResults");
                 });
 
             modelBuilder.Entity("PortfolioApp.Domain.CountryAdjustment", b =>
@@ -165,7 +165,7 @@ namespace PortfolioApp.DataAccess.Migrations
             modelBuilder.Entity("PortfolioApp.Domain.AggregatedResult", b =>
                 {
                     b.HasOne("PortfolioApp.Domain.RunMetadata", "RunMetadata")
-                        .WithMany("Results")
+                        .WithMany("SimulationResults")
                         .HasForeignKey("RunMetadataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,7 +200,7 @@ namespace PortfolioApp.DataAccess.Migrations
                 {
                     b.Navigation("Adjustments");
 
-                    b.Navigation("Results");
+                    b.Navigation("SimulationResults");
                 });
 #pragma warning restore 612, 618
         }
