@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using System.Text.Json;
-
-namespace PortfolioApp.DataAccess.Services;
+﻿namespace PortfolioApp.DataAccess.Services;
 
 public class SimulationService(ICSVImportService cSVImportService, PortfolioAppContext  context) : ISimulationService
 {
