@@ -30,6 +30,7 @@ public partial class MainViewModel : ViewModelBase
             string projectRoot = Path.GetFullPath(Path.Combine(basePath, @"..\..\.."));
 
             string csvPath = Path.Combine(projectRoot, "CSVFiles" );
+            await _cSVImportService.ClearTablesAsync();
             await _cSVImportService.ImportAllAsync(csvPath);
         }
         catch (Exception ex)

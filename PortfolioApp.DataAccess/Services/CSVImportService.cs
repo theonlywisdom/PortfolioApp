@@ -14,8 +14,8 @@ public class CSVImportService : ICSVImportService
 
     public async Task ImportAllAsync(string csvFolderPath)
     {
-        //await ImportRatingsAsync(Path.Combine(csvFolderPath, "Ratings.csv"));
-        //await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
+        await ImportRatingsAsync(Path.Combine(csvFolderPath, "Ratings.csv"));
+        await ImportPortfoliosAsync(Path.Combine(csvFolderPath, "Portfolios.csv"));
         await ImportLoansAsync(Path.Combine(csvFolderPath, "Loans.csv"));
     }
 
@@ -106,10 +106,27 @@ public class CSVImportService : ICSVImportService
             throw;
         }
     }
+
+    public async Task ClearTablesAsync()
+    {
+        _context.RemoveRange(_context.Ratings);
+        _context.RemoveRange(_context.Portfolios);
+        _context.RemoveRange(_context.Loans);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+    }
 }
 
 public interface ICSVImportService
 {
+    Task ClearTablesAsync();
     Task ImportAllAsync(string csvFolderPath);
 }
 
