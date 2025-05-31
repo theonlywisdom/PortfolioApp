@@ -81,7 +81,7 @@ namespace PortfolioApp.DataAccess.Migrations
                     b.Property<decimal>("CollateralValue")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CreditRating")
+                    b.Property<string>("Rating")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -127,7 +127,7 @@ namespace PortfolioApp.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CreditRating")
+                    b.Property<string>("Rating")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

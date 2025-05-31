@@ -7,7 +7,8 @@ public partial class App : Application
     public App()
     {
         ServiceCollection services = new();
-        services.RegisterViewModels()
+        services.RegisterServices()
+            .RegisterViewModels()
             .RegisterViews();
 
         _serviceProvider = services.BuildServiceProvider();

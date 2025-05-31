@@ -11,13 +11,21 @@
     Height="450"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-
-    <TabControl>
-        <TabItem Header="Run Simulation">
-            <view:RunSimulationView DataContext="{Binding RunSimulationViewModel}" />
-        </TabItem>
-        <TabItem Header="Simulation History">
-            <view:SimulationHistoryView DataContext="{Binding SimulationHistoryViewModel}" />
-        </TabItem>
-    </TabControl>
+    <DockPanel>
+        <StackPanel Margin="10 0" DockPanel.Dock="Right">
+            <Button
+                Width="100"
+                Height="30"
+                Command="{Binding LoadDataCommand}"
+                Content="Load Data" />
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Run Simulation">
+                <view:RunSimulationView DataContext="{Binding RunSimulationViewModel}" />
+            </TabItem>
+            <TabItem Header="Simulation History">
+                <view:SimulationHistoryView DataContext="{Binding SimulationHistoryViewModel}" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
