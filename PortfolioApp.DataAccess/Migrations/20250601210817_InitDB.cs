@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PortfolioApp.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initialMigration : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,8 @@ namespace PortfolioApp.DataAccess.Migrations
                     AggregatedResultId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PortfolioName = table.Column<string>(type: "TEXT", nullable: false),
+                    Currency = table.Column<string>(type: "TEXT", nullable: false),
+                    Country = table.Column<string>(type: "TEXT", nullable: false),
                     TotalOutstanding = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalCollateral = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalScenarioCollateral = table.Column<decimal>(type: "decimal(18,2)", nullable: false),

@@ -11,8 +11,8 @@ using PortfolioApp.DataAccess;
 namespace PortfolioApp.DataAccess.Migrations
 {
     [DbContext(typeof(PortfolioAppContext))]
-    [Migration("20250531182555_initialMigration")]
-    partial class initialMigration
+    [Migration("20250601210817_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,14 @@ namespace PortfolioApp.DataAccess.Migrations
                     b.Property<int>("AggregatedResultId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PortfolioName")
                         .IsRequired()
