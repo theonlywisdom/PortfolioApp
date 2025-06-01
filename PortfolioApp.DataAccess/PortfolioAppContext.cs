@@ -25,15 +25,11 @@ public class PortfolioAppContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
-        if (!optionsBuilder.IsConfigured)
-        {
         var dbPath = Path.Combine(AppContext.BaseDirectory, "PortfolioApp.db");
-            optionsBuilder.UseSqlite($"Data Source={dbPath}").LogTo(Console.WriteLine,
-                [DbLoggerCategory.Database.Command.Name],
-                LogLevel.Information)
-        .EnableSensitiveDataLogging();
-        }
+        optionsBuilder.UseSqlite($"Data Source={dbPath}").LogTo(Console.WriteLine,
+            [DbLoggerCategory.Database.Command.Name],
+            LogLevel.Information)
+    .EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
