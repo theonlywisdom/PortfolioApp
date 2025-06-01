@@ -17,6 +17,8 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        var context = _serviceProvider.GetService<PortfolioAppContext>();
+        context?.Database.Migrate();
         var mainWindow = _serviceProvider.GetService<MainWindow>();
         mainWindow?.Show();
     }
