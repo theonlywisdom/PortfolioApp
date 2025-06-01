@@ -29,6 +29,8 @@ public class SimulationService(ICSVImportService csvService, ISimulationCalculat
         var aggregated = results.Select(r => new AggregatedResult
         {
             PortfolioName = r.PortfolioName,
+            Country = r.Country,
+            Currency = r.Currency,
             TotalOutstanding = r.TotalOutstandingAmount,
             TotalCollateral = r.TotalCollateralValue,
             TotalScenarioCollateral = r.TotalScenarioCollateralValue,

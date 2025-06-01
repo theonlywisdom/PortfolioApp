@@ -53,6 +53,22 @@
                     Width="*"
                     Binding="{Binding PortfolioName}"
                     Header="Portfolio Name" />
+
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Currency}"
+                    Header="Currency" />
+
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Country}"
+                    Header="Country" />
+
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding PriceChange}"
+                    Header="Price Change (%)" />
+
                 <DataGridTextColumn
                     Width="Auto"
                     Binding="{Binding TotalOutstanding, StringFormat=N2}"

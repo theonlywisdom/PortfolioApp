@@ -4,6 +4,8 @@ public class AggregatedResult
 {
     public int AggregatedResultId { get; set; }
     public string PortfolioName { get; set; }
+    public string Currency { get; set; }
+    public string Country { get; set; }
     public decimal TotalOutstanding { get; set; }
     public decimal TotalCollateral { get; set; }
     public decimal TotalScenarioCollateral { get; set; }

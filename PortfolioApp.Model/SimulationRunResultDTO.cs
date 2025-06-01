@@ -12,4 +12,9 @@ public class SimulationRunResultDTO
     public decimal TotalCollateral { get; set; }
     public decimal TotalScenarioCollateral { get; set; }
     public decimal TotalExpectedLoss { get; set; }
+
+    public string Country { get; set; }
+    public string Currency { get; set; }
+    public double PriceChange { get; set; }
+
 }
