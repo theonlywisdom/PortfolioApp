@@ -1,8 +1,7 @@
 {
   "profiles": {
     "PortfolioApp.UI": {
-      "commandName": "Project",
-      "workingDirectory": "C:\\Users\\wabaah\\source\\personal-repos\\PortfolioApp\\PortfolioApp.UI"
+      "commandName": "Project"
     }
   }
 }

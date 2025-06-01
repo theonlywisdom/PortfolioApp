@@ -7,8 +7,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
+        var dbPath = Path.Combine(AppContext.BaseDirectory, "PortfolioApp.db");
         services.AddDbContext<PortfolioAppContext>(options =>
-            options.UseSqlite("Data Source=PortfolioApp.db"))
+            options.UseSqlite($"Data Source={dbPath}"))
             .AddTransient<ICSVImportService, CSVImportService>()
             .AddTransient<ISimulationPersister, SimulationPersister>()
             .AddTransient<IPortfolioCalculator, PortfolioCalculator>()
