@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PortfolioApp.Model\PortfolioApp.Domain.csproj" />
+    <ProjectReference Include="..\PortfolioApp.Domain\PortfolioApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

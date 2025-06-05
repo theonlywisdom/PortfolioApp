@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PortfolioApp.DataAccess\PortfolioApp.DataAccess.csproj" />
-    <ProjectReference Include="..\PortfolioApp.Model\PortfolioApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
